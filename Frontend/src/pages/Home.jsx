@@ -15,7 +15,7 @@ import './Home.css';
 
 const Home = () => {
   const navigate = useNavigate();
-  const { state } = useApp();
+  const { state, dispatch } = useApp();
   const { getDailyMissions, completeMission, showConfetti, hideConfetti } = useMissions();
   const { streak } = useStreak();
   const { user, rank, xp, showRankUpCinematic } = state;
@@ -210,7 +210,7 @@ const Home = () => {
 
       {/* Effects */}
       {showConfetti && <ConfettiCanvas active={true} onComplete={hideConfetti} />}
-      {showRankUpCinematic && <RankUpCinematic rank={rank} onComplete={() => {}} />}
+      {showRankUpCinematic && <RankUpCinematic rank={rank} onComplete={() => dispatch({ type: 'HIDE_RANK_UP_CINEMATIC' })} />}
     </div>
   );
 };

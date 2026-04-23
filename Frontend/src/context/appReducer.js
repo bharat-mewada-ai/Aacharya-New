@@ -77,6 +77,12 @@ export const appReducer = (state, action) => {
         ...state,
         user: { ...state.user, avatar: { ...state.user.avatar, ...action.payload } }
       };
+
+    case 'UPDATE_USER_BIO':
+      return {
+        ...state,
+        user: { ...state.user, bio: action.payload }
+      };
     
     // XP and Rank Actions
     case 'ADD_XP': {

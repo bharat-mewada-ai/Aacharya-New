@@ -20,7 +20,7 @@ router.post('/', auth, async (req, res) => {
       return res.status(500).json({ error: 'Gemini API key is missing in environment' });
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+    const model = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
       {
@@ -30,7 +30,18 @@ router.post('/', auth, async (req, res) => {
           'x-goog-api-key': apiKey,
         },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: message }] }],
+          contents: [
+            {
+              role: 'user',
+              parts: [{ text: `You are Aacharya, a wise and motivating AI wellness mentor. Your goal is to help users build healthy habits, stay fit, and maintain a positive mindset. Keep your responses concise, encouraging, and actionable.
+
+User message: ${message}` }]
+            }
+          ],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 500,
+          }
         }),
       }
     );

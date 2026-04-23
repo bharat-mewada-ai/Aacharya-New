@@ -1,6 +1,6 @@
-/* Rank Up Cinematic Styles - STRICT IMPLEMENTATION */
+/* Rank Up Cinematic Styles - FIXED with enter/exit animations */
 
-.rank-up-cinematic {
+.rank-up-cinematic-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,6 +10,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: cinematicEnter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.rank-up-cinematic-wrapper.exit {
+  animation: cinematicExit 0.5s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes cinematicEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cinematicExit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.15);
+  }
 }
 
 .cinematic-overlay {
@@ -58,6 +86,13 @@
   text-shadow: 0 0 15px currentColor;
 }
 
+.rank-tap-hint {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: var(--space-lg);
+  letter-spacing: 0.05em;
+}
+
 .rank-glow {
   position: absolute;
   width: 300px;
@@ -65,6 +100,7 @@
   border-radius: 50%;
   opacity: 0.3;
   animation: glowPulse 2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {

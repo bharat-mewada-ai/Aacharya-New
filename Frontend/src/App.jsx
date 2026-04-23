@@ -14,6 +14,7 @@ import Scanner from './pages/Scanner';
 import Progress from './pages/Progress';
 import Avatar from "./components/Avatar"; 
 import Profile from './pages/Profile';
+import Nutrition from './pages/Nutrition';
 
 import './App.css';
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/progress" element={<Progress />} />
             <Route path="/avatar" element={<Avatar />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/nutrition" element={<Nutrition />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>

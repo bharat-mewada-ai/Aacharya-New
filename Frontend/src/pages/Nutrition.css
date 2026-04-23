@@ -1,0 +1,651 @@
+/* Nutrition Page Styles */
+
+.nutrition-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-bottom: 90px;
+}
+
+/* Main Tabs */
+.nutrition-tabs {
+  display: flex;
+  gap: 0;
+  margin: 0 var(--space-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  margin-top: var(--space-lg);
+}
+
+.nut-tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: calc(var(--radius-lg) - 4px);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nut-tab.active {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+  color: white;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+/* Content Area */
+.nutrition-content {
+  padding: var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Search */
+.nut-search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: var(--space-lg);
+  transition: border-color 0.3s ease;
+}
+
+.nut-search-bar:focus-within {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.15);
+}
+
+.search-icon-nut {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.nut-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+}
+
+.nut-search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.search-clear {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.search-clear:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Filter Chips */
+.filter-chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.filter-chip {
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: var(--font-body);
+}
+
+.filter-chip:hover {
+  border-color: var(--neon-purple);
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--neon-purple);
+  border-color: var(--neon-purple);
+  color: white;
+  box-shadow: 0 2px 12px rgba(168, 85, 247, 0.4);
+}
+
+/* Results Count */
+.results-count {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-md);
+}
+
+/* Food Grid */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.food-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.food-card-emoji {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.food-card:hover .food-card-emoji {
+  transform: scale(1.15);
+}
+
+.food-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.food-card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.food-card-cat {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.food-card-cal {
+  margin-top: 4px;
+}
+
+.cal-num {
+  font-size: 1.125rem;
+  font-weight: 800;
+  font-family: var(--font-number);
+}
+
+.cal-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.food-card-arrow {
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+  transition: all 0.25s ease;
+}
+
+.food-card:hover .food-card-arrow {
+  color: var(--neon-purple);
+  transform: translateX(4px);
+}
+
+/* Vitamin Grid */
+.vitamin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-md);
+}
+
+.vitamin-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vitamin-card:hover {
+  transform: translateY(-2px);
+}
+
+.vitamin-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.vitamin-card:hover .vitamin-card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.vitamin-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vitamin-card-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.vitamin-type-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+  letter-spacing: 0.03em;
+}
+
+.vitamin-type-badge.water {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--neon-cyan);
+}
+
+.vitamin-type-badge.fat {
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--neon-gold);
+}
+
+.vitamin-dri {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* Vertical solubility bar */
+.vitamin-solubility {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sol-bar-track {
+  width: 8px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.sol-bar-fill {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 0.8s ease;
+}
+
+.sol-label {
+  font-size: 0.55rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  max-width: 48px;
+  line-height: 1.2;
+}
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--text-tertiary);
+}
+
+.empty-state span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.empty-state p {
+  font-size: 1rem;
+}
+
+/* ─── Detail Modal ─────────────────────────────────────────── */
+.detail-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.detail-modal {
+  width: 100%;
+  max-width: 600px;
+  max-height: 88vh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-bottom: none;
+  position: relative;
+  animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.detail-modal::-webkit-scrollbar { width: 4px; }
+.detail-modal::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 2px; }
+
+.modal-close {
+  position: sticky;
+  top: var(--space-md);
+  float: right;
+  margin: var(--space-md);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.modal-close:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.4);
+}
+
+.modal-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  padding-top: var(--space-md);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-emoji {
+  font-size: 3.5rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.modal-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  display: block;
+}
+
+.modal-badge {
+  margin-top: 8px;
+}
+
+.modal-body {
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.modal-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-top: var(--space-sm);
+}
+
+/* Nutrient bars */
+.nutrient-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nutrient-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nutrient-name {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.nutrient-meta {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.nutrient-amount {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-family: var(--font-number);
+}
+
+.nutrient-dv {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.nutrient-bar-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.nutrient-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Tags */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.nutrient-tag {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Benefits */
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.benefit-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Pro Tip */
+.pro-tip-box {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid;
+}
+
+.pro-tip-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pro-tip-box p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Vitamin Modal Specific */
+.vit-info-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.vit-info-box {
+  flex: 1;
+  padding: var(--space-md);
+  border: 1px solid;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.vit-info-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.vit-info-value {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.modal-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.warning-box {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 0.875rem;
+  color: var(--neon-gold);
+}
+
+.overdose {
+  background: rgba(239, 68, 68, 0.05);
+  border-left: 3px solid rgba(239, 68, 68, 0.5);
+  padding-left: var(--space-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Horizontal sol bar */
+.sol-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.sol-bar-h-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sol-bar-h-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 768px) {
+  .food-grid,
+  .vitamin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nutrition-tabs {
+    margin: var(--space-md);
+  }
+
+  .modal-hero {
+    padding: var(--space-lg);
+  }
+
+  .modal-emoji {
+    font-size: 2.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+}

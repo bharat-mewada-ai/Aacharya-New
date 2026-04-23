@@ -6,8 +6,9 @@ const BottomNav = () => {
   const navItems = [
     { path: '/home', icon: '🏠', label: 'Home' },
     { path: '/missions', icon: '🎯', label: 'Missions' },
-    { path: '/chat', icon: '💬', label: 'Chat' },
     { path: '/scanner', icon: '📸', label: 'Scanner' },
+    { path: '/chat', icon: '💬', label: 'Chat' },
+    { path: '/nutrition', icon: '🥗', label: 'Nutrition' },
     { path: '/profile', icon: '👤', label: 'Profile' }
   ];
 

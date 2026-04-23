@@ -20,12 +20,12 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  padding: var(--space-sm);
+  padding: 0.25rem;
   color: var(--text-secondary);
   text-decoration: none;
   transition: var(--transition-base);
   border-radius: var(--radius-sm);
-  min-width: 60px;
+  min-width: 50px;
 }
 
 .nav-icon {
