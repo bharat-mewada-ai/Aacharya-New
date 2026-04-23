@@ -12,7 +12,7 @@ import Missions from './pages/Missions';
 import Chat from './pages/Chat';
 import Scanner from './pages/Scanner';
 import Progress from './pages/Progress';
-import Avatar from './pages/Avatar';
+import Avatar from "./components/Avatar"; 
 import Profile from './pages/Profile';
 
 import './App.css';

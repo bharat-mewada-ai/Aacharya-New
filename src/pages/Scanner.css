@@ -1,9 +1,54 @@
-/* Scanner Page Styles - STRICT IMPLEMENTATION */
+/* Scanner Page Styles - IMPROVED VERSION */
 
 .scanner-page {
   min-height: 100vh;
   background: var(--bg-primary);
   padding-bottom: 80px;
+}
+
+/* Mode Toggle */
+.mode-toggle {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--space-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.mode-btn:hover {
+  border-color: var(--neon-purple);
+  transform: translateY(-2px);
+}
+
+.mode-btn.active {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--neon-purple);
+  color: var(--text-primary);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+.mode-icon {
+  font-size: 1.5rem;
+}
+
+.mode-label {
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .scanner-content {
@@ -22,6 +67,103 @@
   align-items: center;
 }
 
+/* Scanner Intro */
+.scanner-intro {
+  width: 100%;
+  max-width: 500px;
+}
+
+.intro-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-2xl);
+  text-align: center;
+}
+
+.intro-icon {
+  font-size: 5rem;
+  filter: drop-shadow(0 0 20px var(--neon-cyan));
+  animation: float 3s ease-in-out infinite;
+}
+
+.intro-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.intro-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Camera Section */
+.camera-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Scanning State */
+.scanning-state {
+  width: 100%;
+  max-width: 600px;
+}
+
+.scanning-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.captured-preview {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+}
+
+.scanning-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(6, 6, 14, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.scanning-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(6, 182, 212, 0.2);
+  border-top-color: var(--neon-cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scanning-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* Section Title */
 .section-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -29,6 +171,7 @@
   margin-bottom: var(--space-lg);
 }
 
+/* History List */
 .history-list {
   display: flex;
   flex-direction: column;
@@ -40,6 +183,11 @@
   flex-direction: column;
   gap: var(--space-sm);
   cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.history-item:hover {
+  transform: translateY(-2px);
 }
 
 .history-header {
@@ -71,10 +219,24 @@
   color: var(--text-secondary);
 }
 
+/* Scan Result Modal Content */
 .scan-result {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+}
+
+.result-image-container {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.result-image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .result-header {
@@ -124,6 +286,7 @@
   background: rgba(251, 191, 36, 0.1);
   border: 1px solid var(--neon-gold);
   border-radius: var(--radius-md);
+  margin: var(--space-md) 0;
 }
 
 .xp-earned {
@@ -137,6 +300,7 @@
   color: var(--text-secondary);
 }
 
+/* Empty State */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -160,4 +324,15 @@
 .empty-description {
   font-size: 1rem;
   color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .intro-icon {
+    font-size: 4rem;
+  }
+  
+  .intro-title {
+    font-size: 1.5rem;
+  }
 }
