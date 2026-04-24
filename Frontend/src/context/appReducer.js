@@ -12,6 +12,8 @@ export const initialState = {
     weight: '',
     goal: null,
     avatar: defaultAvatar,
+    healthCondition: false,
+    healthConditionDetails: '',
     onboardingComplete: false,
     setupComplete: false
   },
@@ -75,6 +77,16 @@ export const appReducer = (state, action) => {
       return {
         ...state,
         user: { ...state.user, weight: action.payload }
+      };
+
+    case 'SET_HEALTH_CONDITION':
+      return {
+        ...state,
+        user: { 
+          ...state.user, 
+          healthCondition: action.payload.hasCondition,
+          healthConditionDetails: action.payload.details || ''
+        }
       };
     
     case 'SET_USER_GOAL': {

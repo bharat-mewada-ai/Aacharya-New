@@ -28,7 +28,8 @@ export const useChat = () => {
 
     try {
       // Create a context-rich message for the AI
-      const contextStr = `[Context - Name: ${state.user.name || 'User'}, Age: ${state.user.age || 'Unknown'}, Weight: ${state.user.weight || 'Unknown'}, Current Goal: ${state.user.goal?.name || 'None'}]`;
+      const healthStr = state.user.healthCondition ? `Health Condition: ${state.user.healthConditionDetails}` : 'Health: No known conditions';
+      const contextStr = `[Context - Name: ${state.user.name || 'User'}, Age: ${state.user.age || 'Unknown'}, Weight: ${state.user.weight || 'Unknown'}, ${healthStr}, Current Goal: ${state.user.goal?.name || 'None'}]`;
       const enrichedMessage = `${contextStr} \n\n${message}`;
 
       // Call real backend API
@@ -51,6 +52,24 @@ export const useChat = () => {
         }
         // Remove the command from the visible text
         replyText = replyText.replace(/\[ACTION:CHANGE_GOAL:(.+?)\]/g, '').trim();
+      }
+
+      // Parse Mission Update Action
+      const missionMatch = replyText.match(/\[ACTION:UPDATE_MISSION:(.+?)\]/);
+      if (missionMatch) {
+        const missionTitle = missionMatch[1];
+        // For simplicity, we'll add it as a new custom mission
+        const newMission = {
+          id: Date.now(),
+          title: missionTitle,
+          desc: "Assigned by AI Mentor based on your conversation",
+          xp: 150,
+          icon: '🎯',
+          type: 'daily',
+          completed: false
+        };
+        dispatch({ type: 'ADD_MISSION', payload: newMission });
+        replyText = replyText.replace(/\[ACTION:UPDATE_MISSION:(.+?)\]/g, '').trim();
       }
       
       const aiMessage = {

@@ -85,7 +85,13 @@ const AvatarPickerModal = ({ current, onSave, onClose }) => {
 
 // ── Edit Profile Modal ────────────────────────────────────────────────────────
 const EditProfileModal = ({ user, onSave, onClose }) => {
-  const [form, setForm] = useState({ name: user.name || '', goal: user.goal?.name || '', bio: user.bio || '' });
+  const [form, setForm] = useState({ 
+    name: user.name || '', 
+    goal: user.goal?.name || '', 
+    bio: user.bio || '',
+    healthCondition: user.healthCondition || false,
+    healthConditionDetails: user.healthConditionDetails || ''
+  });
   const goals = ['Weight Loss', 'Muscle Gain', 'Stay Fit', 'Endurance', 'Flexibility'];
   return (
     <div className="prof-modal-overlay" onClick={onClose}>
@@ -110,6 +116,31 @@ const EditProfileModal = ({ user, onSave, onClose }) => {
           <label className="edit-label">Bio</label>
           <textarea className="edit-input edit-textarea" value={form.bio} onChange={e => setForm(p => ({...p, bio: e.target.value}))} placeholder="Tell something about yourself..." maxLength={120} rows={3} />
           <span className="char-count">{form.bio.length}/120</span>
+
+          <label className="edit-label">Health Condition</label>
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+            <button 
+              className={`goal-chip ${form.healthCondition ? 'active' : ''}`} 
+              onClick={() => setForm(p => ({...p, healthCondition: true}))}
+            >
+              🏥 Has Condition
+            </button>
+            <button 
+              className={`goal-chip ${!form.healthCondition ? 'active' : ''}`} 
+              onClick={() => setForm(p => ({...p, healthCondition: false, healthConditionDetails: ''}))}
+            >
+              ✨ Healthy
+            </button>
+          </div>
+          
+          {form.healthCondition && (
+            <input 
+              className="edit-input" 
+              value={form.healthConditionDetails} 
+              onChange={e => setForm(p => ({...p, healthConditionDetails: e.target.value}))} 
+              placeholder="Specify condition..." 
+            />
+          )}
         </div>
         <button className="prof-save-btn" onClick={() => { onSave(form); onClose(); }}>
           Save Changes
@@ -296,6 +327,10 @@ const Profile = () => {
     dispatch({ type: 'SET_USER_NAME', payload: form.name });
     if (form.goal) dispatch({ type: 'SET_USER_GOAL', payload: { name: form.goal } });
     dispatch({ type: 'UPDATE_USER_BIO', payload: form.bio });
+    dispatch({ 
+      type: 'SET_HEALTH_CONDITION', 
+      payload: { hasCondition: form.healthCondition, details: form.healthConditionDetails } 
+    });
   };
 
   const formatDate = (iso) => new Date(iso).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
@@ -344,6 +379,7 @@ const Profile = () => {
               ['Current Streak', `${streak} days 🔥`],
               ['Missions Completed', stats.totalMissionsCompleted],
               ['Items Scanned', stats.totalScans],
+              ['Health Status', user.healthCondition ? user.healthConditionDetails : 'Perfectly Healthy ✨'],
               ['Member Since', formatDate(stats.joinDate)],
             ].map(([label, val]) => (
               <div key={label} className="stat-row">

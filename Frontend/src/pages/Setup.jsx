@@ -16,6 +16,9 @@ const Setup = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [suggestedGoalId, setSuggestedGoalId] = useState(null);
 
+  const [hasCondition, setHasCondition] = useState(null);
+  const [conditionDetails, setConditionDetails] = useState('');
+
   const goals = [
     {
       id: 'weight-loss',
@@ -55,20 +58,28 @@ const Setup = () => {
     if (age && weight) {
       dispatch({ type: 'SET_USER_AGE', payload: age });
       dispatch({ type: 'SET_USER_WEIGHT', payload: weight });
-      
-      // Auto-suggest goal logic based on weight
-      const weightNum = parseFloat(weight);
-      let suggested = null;
-      if (weightNum > 80) suggested = 'weight-loss';
-      else if (weightNum < 60) suggested = 'muscle-gain';
-      else suggested = 'stay-fit';
-      
-      setSuggestedGoalId(suggested);
-      const goalObj = goals.find(g => g.id === suggested);
-      if (goalObj) setSelectedGoal(goalObj);
-
-      setStep(3);
+      setStep(3); // Go to health condition
     }
+  };
+
+  const handleHealthSubmit = () => {
+    dispatch({ 
+      type: 'SET_HEALTH_CONDITION', 
+      payload: { hasCondition, details: conditionDetails } 
+    });
+    
+    // Auto-suggest goal logic based on weight (moved from handleStatsSubmit)
+    const weightNum = parseFloat(weight);
+    let suggested = null;
+    if (weightNum > 80) suggested = 'weight-loss';
+    else if (weightNum < 60) suggested = 'muscle-gain';
+    else suggested = 'stay-fit';
+    
+    setSuggestedGoalId(suggested);
+    const goalObj = goals.find(g => g.id === suggested);
+    if (goalObj) setSelectedGoal(goalObj);
+
+    setStep(4);
   };
 
   const handleGoalSelect = (goal) => {
@@ -157,6 +168,61 @@ const Setup = () => {
         )}
 
         {step === 3 && (
+          <div className="setup-step fade-up">
+            <div className="setup-icon">🏥</div>
+            <h2 className="setup-title">Health Check</h2>
+            <p className="setup-description">
+              Do you have any pre-existing health conditions?
+            </p>
+            
+            <div className="health-options" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+              <Button
+                variant={hasCondition === true ? 'primary' : 'outline'}
+                onClick={() => setHasCondition(true)}
+                style={{ flex: 1 }}
+              >
+                Yes, I do
+              </Button>
+              <Button
+                variant={hasCondition === false ? 'primary' : 'outline'}
+                onClick={() => {
+                  setHasCondition(false);
+                  setConditionDetails('');
+                }}
+                style={{ flex: 1 }}
+              >
+                No, I'm healthy
+              </Button>
+            </div>
+
+            {hasCondition && (
+              <div className="fade-up" style={{ marginBottom: '2rem' }}>
+                <p className="setup-description" style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
+                  Please specify your condition:
+                </p>
+                <textarea
+                  className="setup-input glass"
+                  placeholder="e.g. Asthma, Knee injury, Diabetes..."
+                  value={conditionDetails}
+                  onChange={(e) => setConditionDetails(e.target.value)}
+                  style={{ width: '100%', minHeight: '100px', padding: '1rem' }}
+                />
+              </div>
+            )}
+            
+            <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              onClick={handleHealthSubmit}
+              disabled={hasCondition === null || (hasCondition === true && !conditionDetails.trim())}
+            >
+              Continue
+            </Button>
+          </div>
+        )}
+
+        {step === 4 && (
           <div className="setup-step fade-up">
             <div className="setup-icon">🎯</div>
             <h2 className="setup-title">Choose Your Fitness Goal</h2>

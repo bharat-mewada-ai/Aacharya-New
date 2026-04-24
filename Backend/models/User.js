@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   height: { type: Number, required: true },
   goal: { type: String, required: true },
   lifestyle: { type: String, required: true },
+  healthCondition: { type: Boolean, default: false },
+  healthConditionDetails: { type: String, default: '' },
   xp: { type: Number, default: 0 },
   streak: { type: Number, default: 0 },
   email: { type: String, required: true, unique: true },

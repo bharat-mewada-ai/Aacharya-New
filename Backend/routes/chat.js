@@ -16,35 +16,47 @@ router.post('/', async (req, res) => {
       process.env.GEMINI_API_KEY ||
       process.env.GOOGLE_API_KEY ||
       process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ error: 'Gemini API key is missing in environment' });
+    
+    if (!apiKey || apiKey === 'your_openai_api_key') {
+      return res.status(500).json({ error: 'AI API key is missing or invalid in environment' });
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-flash-latest';
+    // Using gemini-3-flash-preview which is available for this key in the 2026 context
+    const model = process.env.GEMINI_MODEL || 'gemini-3-flash-preview';
+    
+    const systemInstruction = `You are Aacharya, a wise and motivating AI wellness mentor. 
+Your goal is to help users build healthy habits, stay fit, and maintain a positive mindset. 
+Keep your responses concise, encouraging, and actionable.
+
+CONTEXT HANDLING:
+The user message starts with [Context - ...]. Use this to personalize your advice.
+If the user has a health condition, be cautious and suggest modifications if needed.
+
+ACTION COMMANDS:
+1. To change the user's fitness goal, include: [ACTION:CHANGE_GOAL:<goal_id>]
+   Options: 'weight-loss', 'muscle-gain', or 'stay-fit'.
+2. To assign a new specific mission, include: [ACTION:UPDATE_MISSION:<mission_title>]
+   Example: [ACTION:UPDATE_MISSION:15-min Morning Yoga]
+
+Use these commands ONLY when the user explicitly asks to change their goal or wants a new mission.`;
+
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-goog-api-key': apiKey,
         },
         body: JSON.stringify({
           contents: [
             {
               role: 'user',
-              parts: [{ text: `You are Aacharya, a wise and motivating AI wellness mentor. Your goal is to help users build healthy habits, stay fit, and maintain a positive mindset. Keep your responses concise, encouraging, and actionable.
-
-IMPORTANT: If the user explicitly asks you to change their fitness goal, you MUST include this exact string in your response: [ACTION:CHANGE_GOAL:<goal_id>]
-Replace <goal_id> with exactly one of these options based on their request: 'weight-loss', 'muscle-gain', or 'stay-fit'.
-Do not use this command unless the user explicitly requests to change their goal.
-
-User message: ${message}` }]
+              parts: [{ text: `${systemInstruction}\n\nUser Message with Context:\n${message}` }]
             }
           ],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 2048,
+            maxOutputTokens: 1024,
           }
         }),
       }
@@ -53,6 +65,7 @@ User message: ${message}` }]
     const data = await response.json();
 
     if (!response.ok) {
+      console.error('[Gemini API Error]:', JSON.stringify(data, null, 2));
       const apiError = data?.error?.message || 'Gemini request failed';
       return res.status(response.status).json({ error: apiError });
     }
@@ -63,13 +76,16 @@ User message: ${message}` }]
       .trim();
 
     if (!reply) {
+      console.error('[Gemini Empty Response]:', JSON.stringify(data, null, 2));
       return res.status(502).json({ error: 'Gemini returned an empty response' });
     }
 
     res.json({ reply, model });
   } catch (err) {
+    console.error('[Chat Route Error]:', err);
     res.status(500).json({ error: err.message || 'Unexpected server error' });
   }
 });
+
 
 module.exports = router;
