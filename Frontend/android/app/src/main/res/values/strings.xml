@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Aacharyaa</string>
+    <string name="title_activity_main">Aacharyaa</string>
+    <string name="package_name">com.aacharya.app</string>
+    <string name="custom_url_scheme">com.aacharya.app</string>
+</resources>

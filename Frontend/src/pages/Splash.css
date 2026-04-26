@@ -1,57 +1,89 @@
 /* Splash Page Styles - STRICT IMPLEMENTATION */
 
-.splash-page {
-  min-height: 100vh;
+.splash-screen {
+  height: 100vh;
+  width: 100vw;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-primary);
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 
 .splash-content {
-  text-align: center;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  z-index: 10;
 }
 
-.splash-icon {
-  font-size: 6rem;
-  margin-bottom: var(--space-lg);
-  filter: drop-shadow(0 0 30px var(--neon-purple));
+.logo-container {
+  width: 180px;
+  height: 180px;
+  animation: logoFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(163, 230, 53, 0.4));
 }
 
-.splash-title {
-  font-size: 4rem;
-  font-weight: 900;
-  margin-bottom: var(--space-md);
-  letter-spacing: 0.05em;
-}
-
-.splash-tagline {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-2xl);
-}
-
-.splash-loader {
-  width: 200px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.loader-bar {
+.main-logo {
   width: 100%;
   height: 100%;
-  background: var(--gradient-primary);
+  object-fit: contain;
+}
+
+.brand-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.tagline-container {
+  display: flex;
+  gap: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+.tagline-up { color: #fff; }
+.tagline-grade { color: #a3e635; font-weight: 700; }
+.tagline-your { color: #fff; }
+.tagline-life { color: #a855f7; font-weight: 700; }
+
+.loader-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.loader-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #a3e635, #a855f7);
+  animation: loading 3s ease-in-out;
+  transform-origin: left;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.05); }
+}
+
+@keyframes loading {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
 }
 
 @media (max-width: 768px) {
-  .splash-icon {
-    font-size: 4rem;
   }
   
   .splash-title {

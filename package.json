@@ -7,6 +7,7 @@
     "dev:backend": "cd Backend && npm run dev",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "install:all": "cd Frontend && npm install && cd ../Backend && npm install",
+    "build:apk": "cd Frontend && npm run build && npx cap sync android",
     "start": "npm run dev"
   },
   "keywords": [],

@@ -1,4 +1,4 @@
-// Splash Page - STRICT IMPLEMENTATION
+// Splash Screen - High Performance
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
@@ -10,26 +10,33 @@ const Splash = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!state.user.onboardingComplete) {
-        navigate('/onboarding');
-      } else if (!state.user.setupComplete) {
-        navigate('/setup');
-      } else {
+      if (state.user.setupComplete) {
         navigate('/home');
+      } else {
+        navigate('/onboarding');
       }
-    }, 1500);
+    }, 3000);
 
     return () => clearTimeout(timer);
-  }, [navigate, state.user]);
+  }, [navigate, state.user.setupComplete]);
 
   return (
-    <div className="splash-page">
-      <div className="splash-content fade-up">
-        <div className="splash-icon float">💪</div>
-        <h1 className="splash-title text-gradient">Aacharya</h1>
-        <p className="splash-tagline">Your AI Habit Mentor</p>
-        <div className="splash-loader">
-          <div className="loader-bar shimmer"></div>
+    <div className="splash-screen">
+      <div className="splash-content">
+        <div className="logo-container">
+          <img src="/logo.png" alt="Aacharyaa Logo" className="main-logo" />
+        </div>
+        <div className="brand-text">
+          <h1 className="brand-name">AACHARYA</h1>
+          <div className="tagline-container">
+            <span className="tagline-up">up</span>
+            <span className="tagline-grade">Grade</span>
+            <span className="tagline-your">Your</span>
+            <span className="tagline-life">life</span>
+          </div>
+        </div>
+        <div className="loader-bar">
+          <div className="loader-fill"></div>
         </div>
       </div>
     </div>

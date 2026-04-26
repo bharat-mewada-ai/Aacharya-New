@@ -1,0 +1,9 @@
+{
+  "appId": "com.aacharya.app",
+  "appName": "Aacharyaa",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
