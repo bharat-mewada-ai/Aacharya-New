@@ -5,23 +5,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-lg);
-  background: var(--bg-primary);
+  padding: 20px;
+  background: radial-gradient(circle at bottom left, #0f172a, #020617);
+  overflow: hidden;
 }
 
 .onboarding-content {
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
+  gap: 40px;
+  animation: fadeIn 1s ease-out;
 }
 
 .slide-container {
-  min-height: 400px;
+  min-height: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .slide {
@@ -29,29 +37,60 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-lg);
+  gap: 20px;
 }
 
 .slide-icon {
-  font-size: 6rem;
-  filter: drop-shadow(0 0 20px var(--neon-purple));
+  font-size: 7rem;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.4));
+  animation: float 4s ease-in-out infinite;
 }
 
 .slide-title {
-  font-size: 2rem;
-  font-weight: 700;
-  background: var(--gradient-primary);
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .slide-description {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 500px;
+  font-size: 1.1rem;
+  color: #94a3b8;
+  line-height: 1.7;
+  max-width: 400px;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+
 
 .slide-indicators {
   display: flex;

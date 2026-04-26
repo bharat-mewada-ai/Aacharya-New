@@ -6,6 +6,7 @@ import { useMissions } from '../hooks/useMissions';
 import { useStreak } from '../hooks/useStreak';
 import { usePedometer } from '../hooks/usePedometer';
 import { useNavigate } from 'react-router-dom';
+import { SHOP_PRODUCTS, SHOP_CATS, PRESET_AVATARS } from '../data/shopData';
 import AvatarDisplay from '../components/features/AvatarDisplay';
 import ProgressRing from '../components/ui/ProgressRing';
 import GlassCard from '../components/ui/GlassCard';
@@ -13,6 +14,7 @@ import BottomNav from '../components/layout/BottomNav';
 import ConfettiCanvas from '../components/canvas/ConfettiCanvas';
 import RankUpCinematic from '../components/canvas/RankUpCinematic';
 import './Home.css';
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -84,9 +86,42 @@ const Home = () => {
               <span className="streak-count">{streak}d</span>
             </div>
           </div>
-          <div className="avatar-section" onClick={() => navigate('/avatar')}>
-            <AvatarDisplay avatar={user.avatar} size="lg" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <button 
+              className="shop-header-btn" 
+              onClick={() => dispatch({ type: 'TOGGLE_SHOP' })} 
+              style={{ 
+                background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '50%', width: '45px', height: '45px', fontSize: '20px',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              🛍️
+            </button>
+
+            <div 
+              className="avatar-section" 
+              onClick={() => navigate('/profile')}
+              style={{ 
+                cursor: 'pointer',
+                width: '45px', 
+                height: '45px', 
+                borderRadius: '50%',
+                background: PRESET_AVATARS.find(a => a.id === user.avatarId)?.bg || 'var(--gradient-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '20px',
+                border: '2px solid rgba(255,255,255,0.2)',
+                boxShadow: '0 5px 15px rgba(0,0,0,0.3)'
+              }}
+            >
+              {PRESET_AVATARS.find(a => a.id === user.avatarId)?.emoji || '👤'}
+            </div>
+
           </div>
+
         </div>
       </header>
 

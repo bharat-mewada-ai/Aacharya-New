@@ -1,0 +1,280 @@
+.shop-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overscroll-behavior: contain;
+}
+
+
+.shop-modal {
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  background: rgba(13, 13, 26, 0.95);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+
+.shop-modal-header {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.shop-modal-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.xp-discount-banner {
+  background: rgba(168, 85, 247, 0.15);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin-top: 8px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  display: inline-block;
+  color: #c084fc;
+}
+
+.shop-header-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.cart-pill {
+  background: var(--primary-color);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.shop-modal-close {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.shop-modal-close:hover {
+  background: rgba(255, 50, 50, 0.2);
+  color: #ff4b4b;
+}
+
+.shop-cats {
+  padding: 16px 24px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.shop-cat-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shop-cat-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+.shop-grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.shop-card {
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ad-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  opacity: 0.6;
+}
+
+.shop-emoji {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.shop-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.shop-name {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.shop-brand {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+
+.shop-desc {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.shop-rating {
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.shop-pricing {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.shop-current-price {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.shop-original-price {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.shop-xp-tag {
+  font-size: 0.75rem;
+  color: #10b981;
+  font-weight: 700;
+}
+
+.shop-cart-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shop-cart-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.shop-cart-btn.in-cart {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.shop-checkout-bar {
+  padding: 16px 24px;
+  background: rgba(13, 13, 26, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-info {
+  font-weight: 600;
+}
+
+.checkout-btn-pill {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.checkout-btn-pill:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+}

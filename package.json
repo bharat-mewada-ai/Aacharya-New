@@ -1,0 +1,18 @@
+{
+  "name": "aacharya-root",
+  "version": "1.0.0",
+  "description": "Root for Aacharya Wellness App",
+  "scripts": {
+    "dev:frontend": "cd Frontend && npm run dev",
+    "dev:backend": "cd Backend && npm run dev",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "install:all": "cd Frontend && npm install && cd ../Backend && npm install",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

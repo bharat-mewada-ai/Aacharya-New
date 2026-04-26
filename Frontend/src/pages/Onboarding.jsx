@@ -25,6 +25,11 @@ const Onboarding = () => {
       description: 'Build healthy habits with guided missions. Earn XP, unlock badges, and rank up on your fitness journey.'
     },
     {
+      icon: '🛍️',
+      title: 'Health Store & Perks',
+      description: 'Unlock exclusive discounts on premium supplements and equipment using your earned XP points.'
+    },
+    {
       icon: '💬',
       title: 'Chat with Your AI Mentor',
       description: 'Get instant answers to your fitness questions. Your AI guide is here 24/7 to support your journey.'
@@ -38,6 +43,7 @@ const Onboarding = () => {
       navigate('/setup');
     }
   };
+
 
   const handleSkip = () => {
     navigate('/setup');

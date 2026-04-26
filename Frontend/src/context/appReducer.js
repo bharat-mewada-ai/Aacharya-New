@@ -55,11 +55,15 @@ export const initialState = {
   
   // UI State
   showRankUpCinematic: false,
-  showConfetti: false
+  showConfetti: false,
+  showShop: false
 };
 
 export const appReducer = (state, action) => {
   switch (action.type) {
+    case 'TOGGLE_SHOP':
+      return { ...state, showShop: !state.showShop };
+
     // User Actions
     case 'SET_USER_NAME':
       return {

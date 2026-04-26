@@ -11,7 +11,15 @@ export const AppProvider = ({ children }) => {
     try {
       const savedState = localStorage.getItem('aacharyaState');
       if (savedState) {
-        return JSON.parse(savedState);
+        const parsed = JSON.parse(savedState);
+        if (parsed && typeof parsed === 'object') {
+          return { 
+            ...initialState, 
+            ...parsed, 
+            user: { ...initialState.user, ...(parsed.user || {}) },
+            dailyTracking: { ...initialState.dailyTracking, ...(parsed.dailyTracking || {}) }
+          };
+        }
       }
     } catch (error) {
       console.error('Failed to load state:', error);

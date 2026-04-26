@@ -4,7 +4,7 @@ import { getProgressToNextRank, getNextRank } from '../../data/ranks';
 import './TopBar.css';
 
 const TopBar = ({ title, showProgress = true }) => {
-  const { state } = useApp();
+  const { state, dispatch } = useApp();
   const { xp, rank, streak } = state;
   const nextRank = getNextRank(rank);
   const progress = getProgressToNextRank(xp, rank);
@@ -16,36 +16,50 @@ const TopBar = ({ title, showProgress = true }) => {
           <h2 className="top-bar-title">{title}</h2>
         </div>
         
-        {showProgress && (
-          <div className="top-bar-right">
-            <div className="streak-badge">
-              <span className="streak-icon">🔥</span>
-              <span className="streak-count number">{streak}</span>
-            </div>
-            
-            <div className="rank-info">
-              <div className="rank-badge" style={{ color: rank.color }}>
-                <span className="rank-icon">{rank.icon}</span>
-                <span className="rank-letter">{rank.id}</span>
+        <div className="top-bar-right">
+          <button 
+            className="top-bar-shop-btn" 
+            onClick={() => dispatch({ type: 'TOGGLE_SHOP' })} 
+            style={{ 
+              background: 'none', border: 'none', fontSize: '20px', 
+              cursor: 'pointer', marginRight: '10px' 
+            }}
+          >
+            🛍️
+          </button>
+
+          
+          {showProgress && (
+            <>
+              <div className="streak-badge">
+                <span className="streak-icon">🔥</span>
+                <span className="streak-count number">{streak}</span>
               </div>
               
-              {nextRank && (
-                <div className="xp-progress">
-                  <div className="xp-bar">
-                    <div 
-                      className="xp-fill" 
-                      style={{ 
-                        width: `${progress}%`,
-                        background: `linear-gradient(90deg, ${rank.color}, ${nextRank.color})`
-                      }}
-                    />
-                  </div>
-                  <span className="xp-text number">{xp} XP</span>
+              <div className="rank-info">
+                <div className="rank-badge" style={{ color: rank.color }}>
+                  <span className="rank-icon">{rank.icon}</span>
+                  <span className="rank-letter">{rank.id}</span>
                 </div>
-              )}
-            </div>
-          </div>
-        )}
+                
+                {nextRank && (
+                  <div className="xp-progress">
+                    <div className="xp-bar">
+                      <div 
+                        className="xp-fill" 
+                        style={{ 
+                          width: `${progress}%`,
+                          background: `linear-gradient(90deg, ${rank.color}, ${nextRank.color})`
+                        }}
+                      />
+                    </div>
+                    <span className="xp-text number">{xp} XP</span>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
