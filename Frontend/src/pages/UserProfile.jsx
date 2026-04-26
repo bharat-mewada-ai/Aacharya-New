@@ -99,15 +99,59 @@ const SettingsModal = ({ settings, onUpdate, onClose }) => {
 };
 
 const PremiumModal = ({ onClose }) => {
-  const [activated, setActivated] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState('yearly');
+  const [isActivated, setIsActivated] = useState(false);
+
+  const handleActivate = () => {
+    setIsActivated(true);
+    setTimeout(() => {
+      alert('Premium Activated! Welcome to the elite club. 🎉');
+      onClose();
+    }, 1500);
+  };
+
   return (
     <div className="prof-modal-overlay" onClick={onClose}>
-      <div className="prof-modal glass" onClick={e => e.stopPropagation()}>
-        <h2 className="premium-title-big">Aacharyaa Premium 👑</h2>
-        <button className="prof-save-btn" onClick={() => setActivated(true)}>
-          {activated ? 'Activated! 🎉' : 'Upgrade Now'}
+      <div className="prof-modal premium-modal-theme" onClick={e => e.stopPropagation()}>
+        <button className="prof-modal-close premium-close-btn" onClick={onClose}>✕</button>
+        
+        <div className="premium-hero-section">
+          <div className="premium-crown-big">👑</div>
+          <h2 className="premium-title-big">
+            Aacharyaa <span className="gold-text">Premium</span>
+          </h2>
+          <p className="premium-sub">Unlock your full health potential</p>
+        </div>
+
+        <div className="premium-plans-row">
+          {PREMIUM_PLANS.map(plan => (
+            <div 
+              key={plan.id} 
+              className={`prem-plan ${selectedPlan === plan.id ? 'active' : ''} plan-${plan.id}`}
+              onClick={() => setSelectedPlan(plan.id)}
+              style={{ borderColor: selectedPlan === plan.id ? plan.color : 'rgba(255,255,255,0.05)' }}
+            >
+              {plan.popular && <div className="prem-popular" style={{ background: plan.color }}>⭐ Most Popular</div>}
+              <div className="prem-name">{plan.name}</div>
+              <div className="prem-price-row">
+                <span className="prem-price">₹{plan.price}</span>
+                <span className="prem-period">{plan.period}</span>
+              </div>
+              {plan.savings && <div className="prem-savings">{plan.savings}</div>}
+              <ul className="prem-features">
+                {plan.features.map((f, i) => (
+                  <li key={i}>{f}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <button className="prof-save-btn premium-activate-btn" onClick={handleActivate}>
+          {isActivated ? 'Processing... 🚀' : `Activate ${selectedPlan === 'yearly' ? 'Yearly' : 'Monthly'} Plan`}
         </button>
-        <button className="prof-modal-close" style={{position:'absolute',top:16,right:16}} onClick={onClose}>✕</button>
+        
+        <p className="prem-disclaimer">Demo mode - No real payment charged</p>
       </div>
     </div>
   );
@@ -142,10 +186,34 @@ const Profile = () => {
           <button className="shop-icon-btn" onClick={() => dispatch({ type: 'TOGGLE_SHOP' })}>🛍️</button>
         </GlassCard>
 
+        <GlassCard className="premium-cta-card" onClick={() => setModal('premium')} style={{marginTop:20}}>
+          <div style={{display:'flex', alignItems:'center', gap:16}}>
+            <div className="premium-cta-crown">👑</div>
+            <div>
+              <div className="premium-cta-title">Aacharyaa Premium</div>
+              <div className="premium-cta-sub">Unlock exclusive health insights</div>
+            </div>
+          </div>
+          <div className="premium-cta-pill">Upgrade</div>
+        </GlassCard>
+
         <div className="quick-actions-grid" style={{marginTop:20}}>
-          <button className="quick-action-btn" onClick={() => dispatch({ type: 'TOGGLE_SHOP' })}>🛍️ Shop</button>
-          <button className="quick-action-btn" onClick={() => setModal('premium')}>👑 Premium</button>
-          <button className="quick-action-btn" onClick={() => setModal('settings')}>⚙️ Settings</button>
+          <button className="quick-action-btn" onClick={() => dispatch({ type: 'TOGGLE_SHOP' })}>
+            <span className="qa-icon">🛍️</span>
+            <span className="qa-label">Shop</span>
+          </button>
+          <button className="quick-action-btn" onClick={() => setModal('premium')}>
+            <span className="qa-icon">👑</span>
+            <span className="qa-label">Premium</span>
+          </button>
+          <button className="quick-action-btn" onClick={() => setModal('settings')}>
+            <span className="qa-icon">⚙️</span>
+            <span className="qa-label">Settings</span>
+          </button>
+          <button className="quick-action-btn" onClick={() => setModal('refer')}>
+            <span className="qa-icon">🤝</span>
+            <span className="qa-label">Refer</span>
+          </button>
         </div>
 
 

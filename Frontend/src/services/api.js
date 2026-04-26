@@ -30,6 +30,7 @@ export const authAPI = {
   logout: () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('aacharyaState');
   },
 
   getToken: () => localStorage.getItem('authToken'),

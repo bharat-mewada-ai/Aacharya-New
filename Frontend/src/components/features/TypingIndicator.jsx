@@ -12,6 +12,7 @@ const TypingIndicator = () => {
         <div className="typing-dot"></div>
         <div className="typing-dot"></div>
         <div className="typing-dot"></div>
+        <span className="typing-text">Aacharya is thinking...</span>
       </div>
     </div>
   );

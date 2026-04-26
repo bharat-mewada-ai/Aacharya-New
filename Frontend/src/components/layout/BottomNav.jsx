@@ -9,6 +9,7 @@ const BottomNav = () => {
     { path: '/scanner', icon: '📸', label: 'Scanner' },
     { path: '/chat', icon: '💬', label: 'Chat' },
     { path: '/nutrition', icon: '🥗', label: 'Nutrition' },
+    { path: '/care', icon: '🏥', label: 'Care' },
     { path: '/profile', icon: '👤', label: 'Profile' }
   ];
 

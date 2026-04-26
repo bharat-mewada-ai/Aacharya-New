@@ -11,8 +11,9 @@ export const useChat = () => {
   /**
    * Send message and get AI response with user context
    * @param {string} message - User message
+   * @param {function} onNavigate - Optional callback for navigation
    */
-  const sendMessage = async (message) => {
+  const sendMessage = async (message, onNavigate) => {
     // Add user message immediately
     const userMessage = {
       id: Date.now(),
@@ -70,6 +71,14 @@ export const useChat = () => {
         };
         dispatch({ type: 'ADD_MISSION', payload: newMission });
         replyText = replyText.replace(/\[ACTION:UPDATE_MISSION:(.+?)\]/g, '').trim();
+      }
+
+      // Parse Navigation Action
+      const navMatch = replyText.match(/\[ACTION:NAVIGATE:(.+?)\]/);
+      if (navMatch && onNavigate) {
+        const targetPath = navMatch[1];
+        setTimeout(() => onNavigate(targetPath), 2000); // Delayed navigation for better UX
+        replyText = replyText.replace(/\[ACTION:NAVIGATE:(.+?)\]/g, '').trim();
       }
       
       const aiMessage = {

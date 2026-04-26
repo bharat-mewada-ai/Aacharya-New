@@ -1,5 +1,5 @@
-// Chat Page - IMPROVED VERSION
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useChat } from '../hooks/useChat';
 import TopBar from '../components/layout/TopBar';
 import BottomNav from '../components/layout/BottomNav';
@@ -9,6 +9,7 @@ import Button from '../components/ui/Button';
 import './Chat.css';
 
 const Chat = () => {
+  const navigate = useNavigate();
   const { chatHistory, sendMessage, isTyping } = useChat();
   const [input, setInput] = useState('');
   const [isSending, setIsSending] = useState(false);
@@ -30,11 +31,13 @@ const Chat = () => {
    * Handle sending message
    */
   const handleSend = async () => {
-    if (input.trim() && !isSending) {
-      setIsSending(true);
-      await sendMessage(input);
-      setInput('');
-      setIsSending(false);
+    if (input.trim()) {
+      const messageText = input;
+      setInput(''); // Clear input immediately
+      
+      // Call sendMessage without blocking the UI
+      // We don't set isSending to true here anymore so the button stays active
+      sendMessage(messageText, navigate);
       
       // Focus back on input
       inputRef.current?.focus();
@@ -55,11 +58,7 @@ const Chat = () => {
    * Handle quick question click
    */
   const handleQuickQuestion = async (question) => {
-    setInput(question);
-    setIsSending(true);
-    await sendMessage(question);
-    setInput('');
-    setIsSending(false);
+    sendMessage(question, navigate);
   };
 
   /**
@@ -147,10 +146,10 @@ const Chat = () => {
           variant="primary"
           size="md"
           onClick={handleSend}
-          disabled={!input.trim() || isSending}
-          icon={isSending ? '⏳' : '📤'}
+          disabled={!input.trim()}
+          icon="📤"
         >
-          {isSending ? 'Sending...' : 'Send'}
+          Send
         </Button>
       </div>
 

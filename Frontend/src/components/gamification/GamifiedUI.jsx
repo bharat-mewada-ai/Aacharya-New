@@ -4,19 +4,79 @@ import { useApp } from '../../context/AppContext';
 import { useGamificationStore } from '../../hooks/useGamificationStore';
 
 import { XP_SOURCES } from '../../data/gamificationData';
-import { Flame, Droplets, CheckCircle, Trophy, RefreshCw, PlusCircle, LogOut } from 'lucide-react';
+import { PREMIUM_PLANS } from '../../data/shopData';
+import { Flame, Droplets, CheckCircle, Trophy, RefreshCw, PlusCircle, LogOut, Crown } from 'lucide-react';
+
+const PremiumModal = ({ onClose }) => {
+  const [selectedPlan, setSelectedPlan] = React.useState('yearly');
+  const [isActivated, setIsActivated] = React.useState(false);
+
+  const handleActivate = () => {
+    setIsActivated(true);
+    setTimeout(() => {
+      alert('Premium Activated! Welcome to the elite club. 🎉');
+      onClose();
+    }, 1500);
+  };
+
+  return (
+    <div className="prof-modal-overlay" onClick={onClose} style={{ pointerEvents: 'auto' }}>
+      <div className="prof-modal premium-modal-theme" onClick={e => e.stopPropagation()}>
+        <button className="prof-modal-close premium-close-btn" onClick={onClose}>✕</button>
+        
+        <div className="premium-hero-section">
+          <div className="premium-crown-big">👑</div>
+          <h2 className="premium-title-big">
+            Aacharyaa <span className="gold-text">Premium</span>
+          </h2>
+          <p className="premium-sub">Unlock your full health potential</p>
+        </div>
+
+        <div className="premium-plans-row">
+          {PREMIUM_PLANS.map(plan => (
+            <div 
+              key={plan.id} 
+              className={`prem-plan ${selectedPlan === plan.id ? 'active' : ''} plan-${plan.id}`}
+              onClick={() => setSelectedPlan(plan.id)}
+              style={{ borderColor: selectedPlan === plan.id ? plan.color : 'rgba(255,255,255,0.05)' }}
+            >
+              {plan.popular && <div className="prem-popular" style={{ background: plan.color }}>⭐ Most Popular</div>}
+              <div className="prem-name">{plan.name}</div>
+              <div className="prem-price-row">
+                <span className="prem-price">₹{plan.price}</span>
+                <span className="prem-period">{plan.period}</span>
+              </div>
+              {plan.savings && <div className="prem-savings">{plan.savings}</div>}
+              <ul className="prem-features">
+                {plan.features.map((f, i) => (
+                  <li key={i}>{f}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <button className="prof-save-btn premium-activate-btn" onClick={handleActivate}>
+          {isActivated ? 'Processing... 🚀' : `Activate ${selectedPlan === 'yearly' ? 'Yearly' : 'Monthly'} Plan`}
+        </button>
+        
+        <p className="prem-disclaimer">Demo mode - No real payment charged</p>
+      </div>
+    </div>
+  );
+};
 
 export default function GamifiedUI() {
   const { dispatch } = useApp();
   const { 
     totalXP, rank, level, stats, setAnimation, addXP, resetXP, currentAnimation 
   } = useGamificationStore();
+  const [modal, setModal] = React.useState(null);
 
 
   const handleLogout = () => {
     if(window.confirm('Logout from Aacharyaa?')) {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('userId');
+      localStorage.clear();
       window.location.href = '/';
     }
   };
@@ -43,6 +103,18 @@ export default function GamifiedUI() {
         </div>
         
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <button 
+            onClick={() => setModal('premium')}
+            style={{ 
+              background: 'rgba(251, 191, 36, 0.15)', color: '#fbbf24', 
+              border: '1px solid rgba(251, 191, 36, 0.4)', borderRadius: '50%', width: '40px', height: '40px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+              fontSize: '20px', backdropFilter: 'blur(10px)', boxShadow: '0 0 15px rgba(251, 191, 36, 0.3)'
+            }}
+          >
+            <Crown size={20} />
+          </button>
+
           <button 
             onClick={() => dispatch({ type: 'TOGGLE_SHOP' })}
             style={{ 
@@ -142,6 +214,8 @@ export default function GamifiedUI() {
           </button>
         </div>
       </div>
+
+      {modal === 'premium' && <PremiumModal onClose={() => setModal(null)} />}
 
     </div>
   );

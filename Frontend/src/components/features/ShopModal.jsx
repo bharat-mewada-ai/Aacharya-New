@@ -10,8 +10,8 @@ const ShopModal = ({ onClose }) => {
   const [cat, setCat] = useState('All');
   const [cart, setCart] = useState([]);
   
-  // Dynamic XP Discount: 1% for every 500 XP, max 20%
-  const xpDiscountPercent = Math.min(20, Math.floor(xp / 500));
+  // Dynamic XP Discount: 1% for every 200 XP, max 30%
+  const xpDiscountPercent = Math.min(30, Math.floor(xp / 200));
   
   const filtered = SHOP_PRODUCTS.filter(p => cat === 'All' || p.category === cat);
   
@@ -60,9 +60,11 @@ const ShopModal = ({ onClose }) => {
                 <div className="shop-desc">{p.description}</div>
                 <div className="shop-rating">{'⭐'.repeat(Math.round(p.rating))} {p.rating}</div>
                 <div className="shop-pricing">
-                  <span className="shop-current-price" style={{color:p.color}}>₹{finalPrice}</span>
-                  <span className="shop-original-price">₹{p.price}</span>
-                  <span className="shop-xp-tag">-{xpDiscountPercent}% XP</span>
+                  <div className="price-main">
+                    <span className="shop-current-price" style={{color:p.color}}>₹{finalPrice.toLocaleString()}</span>
+                    <span className="shop-original-price">₹{p.price.toLocaleString()}</span>
+                  </div>
+                  <span className="shop-xp-tag">🎁 {xpDiscountPercent}% XP Reward applied</span>
                 </div>
                 <button 
                   className={`shop-cart-btn ${cart.includes(p.id)?'in-cart':''}`} 

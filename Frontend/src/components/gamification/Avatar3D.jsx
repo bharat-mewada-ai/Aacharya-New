@@ -1,17 +1,29 @@
 import React, { useRef, useEffect, useState, Suspense } from 'react';
 import { useGLTF, useAnimations, Float, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
+import { useApp } from '../../context/AppContext';
 import { useGamificationStore } from '../../hooks/useGamificationStore';
 
-const MODEL_PATHS = [
-  '/models/model (2).glb',  // Rank E
-  '/models/model (1).glb',  // Rank D
-  '/models/model (3).glb',  // Rank C
-  '/models/model (4).glb',  // Rank B
-  '/models/model (5).glb',  // Rank A
-  '/models/model (6).glb',  // Rank S
-  '/models/model (7).glb',  // Rank SS
-  '/models/model.glb',      // Rank SSS & ∞
+const BOY_MODELS = [
+  '/models/model (1).glb', // Rank E (Novice)
+  '/models/model (2).glb', // Rank D (Apprentice)
+  '/models/model.glb',     // Rank C (Adept)
+  '/models/model.glb',     // Rank B
+  '/models/model.glb',     // Rank A
+  '/models/model.glb',     // Rank S
+  '/models/model.glb',     // Rank SS
+  '/models/model.glb',     // Rank SSS & ∞
+];
+
+const GIRL_MODELS = [
+  '/models/model (3).glb', // Rank E (Novice)
+  '/models/model (4).glb', // Rank D (Apprentice)
+  '/models/model (5).glb', // Rank C (Adept)
+  '/models/model (5).glb', // Rank B
+  '/models/model (5).glb', // Rank A
+  '/models/model (5).glb', // Rank S
+  '/models/model (5).glb', // Rank SS
+  '/models/model (5).glb', // Rank SSS & ∞
 ];
 
 function Model({ path, isLevelUp }) {
@@ -45,9 +57,14 @@ function Model({ path, isLevelUp }) {
   );
 }
 
-export default function Avatar3D() {
+export default function Avatar3D({ gender: overrideGender }) {
+  const { state } = useApp();
+  const { user } = state;
   const { rank } = useGamificationStore();
-  const rankIndex = Math.min(rank.index, MODEL_PATHS.length - 1);
+  
+  const currentGender = overrideGender || user.gender;
+  const modelPaths = currentGender === 'girl' ? GIRL_MODELS : BOY_MODELS;
+  const rankIndex = Math.min(rank.index, modelPaths.length - 1);
   const [transitioning, setTransitioning] = useState(false);
   const prevRank = useRef(rankIndex);
 
@@ -77,7 +94,7 @@ export default function Avatar3D() {
 
       <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
         <Suspense fallback={<mesh><boxGeometry args={[0.5, 1, 0.5]} /><meshStandardMaterial wireframe color={rank.auraColor} /></mesh>}>
-          <Model path={MODEL_PATHS[rankIndex]} isLevelUp={transitioning} />
+          <Model path={modelPaths[rankIndex]} isLevelUp={transitioning} />
         </Suspense>
       </Float>
     </group>
@@ -85,4 +102,5 @@ export default function Avatar3D() {
 }
 
 // Preload all models
-MODEL_PATHS.forEach(path => useGLTF.preload(path));
+BOY_MODELS.forEach(path => useGLTF.preload(path));
+GIRL_MODELS.forEach(path => useGLTF.preload(path));

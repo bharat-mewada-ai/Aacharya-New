@@ -198,17 +198,22 @@
 }
 
 .shop-pricing {
-  margin-top: auto;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.price-main {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .shop-current-price {
+  font-size: 1.25rem;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-family: var(--font-number);
 }
 
 .shop-original-price {
@@ -218,9 +223,14 @@
 }
 
 .shop-xp-tag {
-  font-size: 0.75rem;
-  color: #10b981;
+  font-size: 0.7rem;
   font-weight: 700;
+  color: var(--neon-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+  border: 1px solid rgba(6, 182, 212, 0.2);
 }
 
 .shop-cart-btn {

@@ -46,3 +46,11 @@
     opacity: 1;
   }
 }
+
+.typing-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  margin-left: 0.5rem;
+  opacity: 0.8;
+}

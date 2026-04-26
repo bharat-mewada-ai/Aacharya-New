@@ -6,7 +6,7 @@ import ParticleAura from './ParticleAura';
 import Platform3D from './Platform3D';
 import { useGamificationStore } from '../../hooks/useGamificationStore';
 
-export default function GamifiedScene() {
+export default function GamifiedScene({ gender }) {
   const { rank } = useGamificationStore();
 
   return (
@@ -29,10 +29,10 @@ export default function GamifiedScene() {
           castShadow 
           shadow-mapSize={[1024, 1024]}
         />
-        <pointLight position={[0, 2, 0]} color={rank.auraColor} intensity={1.5} distance={5} />
+        <pointLight position={[0, 0.2, 0]} color={rank.auraColor} intensity={0.8} distance={5} />
         <spotLight position={[-3, 3, -2]} color="#4444ff" intensity={2} angle={0.3} penumbra={1} />
 
-        <Avatar3D />
+        <Avatar3D gender={gender} />
         <ParticleAura />
         <Platform3D />
         <ContactShadows 

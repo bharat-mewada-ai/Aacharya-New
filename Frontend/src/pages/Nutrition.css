@@ -98,6 +98,55 @@
   color: var(--text-primary);
 }
 
+/* Diet Filters */
+.diet-filters {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.diet-chip {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.diet-chip.active {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.diet-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.diet-indicator.veg {
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+.diet-indicator.non-veg {
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+
 /* Filter Chips */
 .filter-chips {
   display: flex;
@@ -647,5 +696,189 @@
 
   .modal-title {
     font-size: 1.2rem;
+  }
+}
+
+/* ─── Diet Planner Styles ───────────────────────────────────────── */
+.diet-planner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding-bottom: 2rem;
+}
+
+.summary-card {
+  padding: var(--space-xl);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.summary-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.item-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.summary-macros {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.macro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.macro-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-family: var(--font-number);
+}
+
+.macro-lab {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.plate-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.empty-plate {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px dashed rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+}
+
+.empty-plate span {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+.empty-plate p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.add-btn-primary, .add-more-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-more-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  width: 100%;
+}
+
+.add-more-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--neon-purple);
+}
+
+.plate-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.plate-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+}
+
+.p-emoji {
+  font-size: 1.75rem;
+}
+
+.p-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.p-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.p-meta {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.p-remove {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.p-remove:hover {
+  opacity: 1;
+}
+
+.add-to-plate-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 0.875rem;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: var(--space-md);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(168, 85, 247, 0.3);
+}
+
+.add-to-plate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+}
+
+@media (max-width: 480px) {
+  .summary-macros {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

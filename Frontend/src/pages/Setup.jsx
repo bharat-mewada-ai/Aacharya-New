@@ -1,7 +1,8 @@
 // Setup Page - STRICT IMPLEMENTATION
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import GamifiedScene from '../components/gamification/GamifiedScene';
 import Button from '../components/ui/Button';
 import GlassCard from '../components/ui/GlassCard';
 import './Setup.css';
@@ -11,6 +12,7 @@ const Setup = () => {
   const { dispatch } = useApp();
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
+  const [gender, setGender] = useState('boy');
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
   const [selectedGoal, setSelectedGoal] = useState(null);
@@ -49,9 +51,14 @@ const Setup = () => {
   const handleNameSubmit = () => {
     if (name.trim()) {
       dispatch({ type: 'SET_USER_NAME', payload: name });
-      dispatch({ type: 'COMPLETE_ONBOARDING' });
-      setStep(2);
+      setStep(1.5); // New Gender step
     }
+  };
+
+  const handleGenderSubmit = () => {
+    dispatch({ type: 'SET_USER_GENDER', payload: gender });
+    dispatch({ type: 'COMPLETE_ONBOARDING' });
+    setStep(2);
   };
 
   const handleStatsSubmit = () => {
@@ -127,6 +134,80 @@ const Setup = () => {
           </div>
         )}
 
+        {step === 1.5 && (
+          <div className="setup-step fade-up gender-selection-step">
+            <div className="setup-icon">👤</div>
+            <h2 className="setup-title">Choose Your Avatar Type</h2>
+            <p className="setup-description">
+              Select your gender to customize your 3D avatar
+            </p>
+            
+            {/* 3D Preview Container */}
+            <div className="avatar-preview-box glass" style={{ 
+              width: '100%', 
+              height: '300px', 
+              borderRadius: '24px', 
+              overflow: 'hidden', 
+              position: 'relative',
+              marginBottom: '1rem',
+              border: '1px solid rgba(255,255,255,0.1)',
+              background: 'rgba(0,0,0,0.2)'
+            }}>
+              <Suspense fallback={<div className="loading-preview">Loading Avatar...</div>}>
+                <GamifiedScene gender={gender} />
+              </Suspense>
+            </div>
+            
+            <div className="gender-options" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', width: '100%' }}>
+              <GlassCard 
+                className={`gender-card ${gender === 'boy' ? 'selected' : ''}`}
+                onClick={() => setGender('boy')}
+                style={{ 
+                  flex: 1, 
+                  padding: '20px', 
+                  textAlign: 'center', 
+                  cursor: 'pointer', 
+                  transition: 'all 0.3s ease',
+                  background: gender === 'boy' ? 'rgba(251, 191, 36, 0.15)' : 'rgba(255,255,255,0.05)',
+                  border: gender === 'boy' ? '2px solid #fbbf24' : '1px solid rgba(255,255,255,0.1)',
+                  boxShadow: gender === 'boy' ? '0 0 20px rgba(251, 191, 36, 0.3)' : 'none',
+                  transform: gender === 'boy' ? 'scale(1.05)' : 'scale(1)'
+                }}
+              >
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👦</div>
+                <div style={{ fontWeight: 'bold', color: gender === 'boy' ? '#fbbf24' : 'white' }}>Boy</div>
+              </GlassCard>
+              <GlassCard 
+                className={`gender-card ${gender === 'girl' ? 'selected' : ''}`}
+                onClick={() => setGender('girl')}
+                style={{ 
+                  flex: 1, 
+                  padding: '20px', 
+                  textAlign: 'center', 
+                  cursor: 'pointer', 
+                  transition: 'all 0.3s ease',
+                  background: gender === 'girl' ? 'rgba(236, 72, 153, 0.15)' : 'rgba(255,255,255,0.05)',
+                  border: gender === 'girl' ? '2px solid #ec4899' : '1px solid rgba(255,255,255,0.1)',
+                  boxShadow: gender === 'girl' ? '0 0 20px rgba(236, 72, 153, 0.3)' : 'none',
+                  transform: gender === 'girl' ? 'scale(1.05)' : 'scale(1)'
+                }}
+              >
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👧</div>
+                <div style={{ fontWeight: 'bold', color: gender === 'girl' ? '#ec4899' : 'white' }}>Girl</div>
+              </GlassCard>
+            </div>
+            
+            <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              onClick={handleGenderSubmit}
+            >
+              Confirm & Continue
+            </Button>
+          </div>
+        )}
+
         {step === 2 && (
           <div className="setup-step fade-up">
             <div className="setup-icon">⚖️</div>
@@ -177,19 +258,19 @@ const Setup = () => {
             
             <div className="health-options" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
               <Button
-                variant={hasCondition === true ? 'primary' : 'outline'}
+                variant={hasCondition === true ? 'primary' : 'secondary'}
                 onClick={() => setHasCondition(true)}
-                style={{ flex: 1 }}
+                style={{ flex: 1, color: 'white' }}
               >
                 Yes, I do
               </Button>
               <Button
-                variant={hasCondition === false ? 'primary' : 'outline'}
+                variant={hasCondition === false ? 'primary' : 'secondary'}
                 onClick={() => {
                   setHasCondition(false);
                   setConditionDetails('');
                 }}
-                style={{ flex: 1 }}
+                style={{ flex: 1, color: 'white' }}
               >
                 No, I'm healthy
               </Button>

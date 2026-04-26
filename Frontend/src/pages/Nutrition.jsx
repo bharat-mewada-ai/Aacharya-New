@@ -12,6 +12,7 @@ const foodData = [
     name: 'Chicken Breast',
     emoji: '🍗',
     category: 'Protein',
+    isVeg: false,
     calories: 165,
     per: '100g',
     color: '#f59e0b',
@@ -30,6 +31,7 @@ const foodData = [
     name: 'Egg',
     emoji: '🥚',
     category: 'Protein',
+    isVeg: false,
     calories: 155,
     per: '100g',
     color: '#fbbf24',
@@ -48,6 +50,7 @@ const foodData = [
     name: 'Spinach',
     emoji: '🥬',
     category: 'Vegetable',
+    isVeg: true,
     calories: 23,
     per: '100g',
     color: '#10b981',
@@ -66,6 +69,7 @@ const foodData = [
     name: 'Banana',
     emoji: '🍌',
     category: 'Fruit',
+    isVeg: true,
     calories: 89,
     per: '100g',
     color: '#fbbf24',
@@ -84,6 +88,7 @@ const foodData = [
     name: 'Brown Rice',
     emoji: '🍚',
     category: 'Carbs',
+    isVeg: true,
     calories: 216,
     per: '100g (cooked)',
     color: '#d97706',
@@ -102,6 +107,7 @@ const foodData = [
     name: 'Salmon',
     emoji: '🐟',
     category: 'Protein',
+    isVeg: false,
     calories: 208,
     per: '100g',
     color: '#f97316',
@@ -120,6 +126,7 @@ const foodData = [
     name: 'Avocado',
     emoji: '🥑',
     category: 'Fats',
+    isVeg: true,
     calories: 160,
     per: '100g',
     color: '#84cc16',
@@ -138,6 +145,7 @@ const foodData = [
     name: 'Greek Yogurt',
     emoji: '🍶',
     category: 'Dairy',
+    isVeg: true,
     calories: 100,
     per: '100g',
     color: '#a78bfa',
@@ -148,14 +156,15 @@ const foodData = [
       fiber: { amount: '0g', dv: 0 },
     },
     vitamins: ['Calcium', 'B12', 'Probiotics', 'Phosphorus', 'Iodine'],
-    benefits: ['Gut health', 'Bone strength', 'Muscle repair'],
-    tip: 'Choose plain, unsweetened for maximum health benefit.',
+    benefits: ['Gut health', 'Muscle repair', 'Bone strength'],
+    tip: 'Choose plain, unsweetened yogurt to avoid hidden sugars.',
   },
   {
     id: 9,
     name: 'Sweet Potato',
     emoji: '🍠',
     category: 'Carbs',
+    isVeg: true,
     calories: 86,
     per: '100g',
     color: '#f97316',
@@ -163,20 +172,21 @@ const foodData = [
       protein: { amount: '1.6g', dv: 3 },
       fat: { amount: '0.1g', dv: 0 },
       carbs: { amount: '20g', dv: 7 },
-      fiber: { amount: '3g', dv: 11 },
+      fiber: { amount: '3g', dv: 12 },
     },
-    vitamins: ['Beta-Carotene (Vit A)', 'Vitamin C', 'Manganese', 'Potassium'],
-    benefits: ['Immunity boost', 'Vision health', 'Blood sugar balance'],
-    tip: 'Pair with a fat source to absorb more beta-carotene.',
+    vitamins: ['Vitamin A', 'Vitamin C', 'Manganese', 'B6', 'Potassium'],
+    benefits: ['Vision health', 'Immunity', 'Gut health'],
+    tip: 'A single sweet potato provides 400% of your daily Vitamin A!',
   },
   {
     id: 10,
     name: 'Almonds',
     emoji: '🥜',
     category: 'Nuts',
+    isVeg: true,
     calories: 579,
     per: '100g',
-    color: '#b45309',
+    color: '#d97706',
     nutrients: {
       protein: { amount: '21g', dv: 42 },
       fat: { amount: '50g', dv: 64 },
@@ -187,6 +197,196 @@ const foodData = [
     benefits: ['Heart health', 'Brain boost', 'Weight management'],
     tip: 'A small handful (23 almonds) is the ideal daily portion.',
   },
+  {
+    id: 11,
+    name: 'Mango',
+    emoji: '🥭',
+    category: 'Fruit',
+    isVeg: true,
+    calories: 60,
+    per: '100g',
+    color: '#fbbf24',
+    nutrients: {
+      protein: { amount: '0.8g', dv: 1 },
+      fat: { amount: '0.4g', dv: 0 },
+      carbs: { amount: '15g', dv: 5 },
+      fiber: { amount: '1.6g', dv: 6 },
+    },
+    vitamins: ['Vitamin A', 'Vitamin C', 'Vitamin B6', 'Folate'],
+    benefits: ['Immune boost', 'Eye health', 'Digestion'],
+    tip: 'Rich in antioxidants like mangiferin.',
+  },
+  {
+    id: 12,
+    name: 'Paneer',
+    emoji: '🧀',
+    category: 'Protein',
+    isVeg: true,
+    calories: 265,
+    per: '100g',
+    color: '#f59e0b',
+    nutrients: {
+      protein: { amount: '18g', dv: 36 },
+      fat: { amount: '20g', dv: 25 },
+      carbs: { amount: '1.2g', dv: 0 },
+      fiber: { amount: '0g', dv: 0 },
+    },
+    vitamins: ['Calcium', 'Vitamin D', 'Vitamin B12', 'Magnesium'],
+    benefits: ['Muscle repair', 'Strong bones', 'Healthy weight'],
+    tip: 'Best consumed fresh; grill with minimal oil.',
+  },
+  {
+    id: 13,
+    name: 'Kiwi',
+    emoji: '🥝',
+    category: 'Fruit',
+    isVeg: true,
+    calories: 61,
+    per: '100g',
+    color: '#4ade80',
+    nutrients: {
+      protein: { amount: '1.1g', dv: 2 },
+      fat: { amount: '0.5g', dv: 0 },
+      carbs: { amount: '15g', dv: 5 },
+      fiber: { amount: '3g', dv: 12 },
+    },
+    vitamins: ['Vitamin C', 'Vitamin K', 'Vitamin E', 'Folate'],
+    benefits: ['Heart health', 'Digestion', 'Skin health'],
+    tip: 'Contains more Vitamin C than an orange!',
+  },
+  {
+    id: 14,
+    name: 'Blueberries',
+    emoji: '🫐',
+    category: 'Fruit',
+    isVeg: true,
+    calories: 57,
+    per: '100g',
+    color: '#3b82f6',
+    nutrients: {
+      protein: { amount: '0.7g', dv: 1 },
+      fat: { amount: '0.3g', dv: 0 },
+      carbs: { amount: '14g', dv: 5 },
+      fiber: { amount: '2.4g', dv: 10 },
+    },
+    vitamins: ['Vitamin C', 'Vitamin K', 'Manganese', 'Antioxidants'],
+    benefits: ['Brain health', 'Anti-aging', 'Heart health'],
+    tip: 'One of the highest antioxidant-rich foods.',
+  },
+  {
+    id: 15,
+    name: 'Tofu',
+    emoji: '⬜',
+    category: 'Protein',
+    isVeg: true,
+    calories: 76,
+    per: '100g',
+    color: '#f8fafc',
+    nutrients: {
+      protein: { amount: '8g', dv: 16 },
+      fat: { amount: '4.8g', dv: 6 },
+      carbs: { amount: '1.9g', dv: 1 },
+      fiber: { amount: '0.3g', dv: 1 },
+    },
+    vitamins: ['Calcium', 'Manganese', 'Selenium', 'Phosphorus', 'Iron'],
+    benefits: ['Plant-based protein', 'Lower cholesterol', 'Bone health'],
+    tip: 'Press out water before cooking for a crispier texture.',
+  },
+  {
+    id: 16,
+    name: 'Chickpeas',
+    emoji: '🥣',
+    category: 'Protein',
+    isVeg: true,
+    calories: 164,
+    per: '100g (cooked)',
+    color: '#fbbf24',
+    nutrients: {
+      protein: { amount: '9g', dv: 18 },
+      fat: { amount: '2.6g', dv: 3 },
+      carbs: { amount: '27g', dv: 9 },
+      fiber: { amount: '7.6g', dv: 30 },
+    },
+    vitamins: ['Folate', 'Iron', 'Phosphorus', 'Copper', 'Manganese'],
+    benefits: ['High fiber', 'Satiety', 'Blood sugar control'],
+    tip: 'Rich in both fiber and protein — perfect for weight management.',
+  },
+  {
+    id: 17,
+    name: 'Lentils (Dal)',
+    emoji: '🍲',
+    category: 'Protein',
+    isVeg: true,
+    calories: 116,
+    per: '100g (cooked)',
+    color: '#f59e0b',
+    nutrients: {
+      protein: { amount: '9g', dv: 18 },
+      fat: { amount: '0.4g', dv: 1 },
+      carbs: { amount: '20g', dv: 7 },
+      fiber: { amount: '7.9g', dv: 32 },
+    },
+    vitamins: ['Folate', 'Iron', 'Thiamine', 'Pantothenic Acid'],
+    benefits: ['Iron source', 'Energy levels', 'Heart health'],
+    tip: 'Add a squeeze of lemon to increase iron absorption.',
+  },
+  {
+    id: 18,
+    name: 'Broccoli',
+    emoji: '🥦',
+    category: 'Vegetable',
+    isVeg: true,
+    calories: 34,
+    per: '100g',
+    color: '#16a34a',
+    nutrients: {
+      protein: { amount: '2.8g', dv: 6 },
+      fat: { amount: '0.4g', dv: 1 },
+      carbs: { amount: '7g', dv: 2 },
+      fiber: { amount: '2.6g', dv: 10 },
+    },
+    vitamins: ['Vitamin K', 'Vitamin C', 'Folate', 'Potassium'],
+    benefits: ['Detoxification', 'Bone health', 'Immune support'],
+    tip: 'Steam lightly for 3-4 minutes to preserve most nutrients.',
+  },
+  {
+    id: 19,
+    name: 'Apple',
+    emoji: '🍎',
+    category: 'Fruit',
+    isVeg: true,
+    calories: 52,
+    per: '100g',
+    color: '#ef4444',
+    nutrients: {
+      protein: { amount: '0.3g', dv: 1 },
+      fat: { amount: '0.2g', dv: 0 },
+      carbs: { amount: '14g', dv: 5 },
+      fiber: { amount: '2.4g', dv: 10 },
+    },
+    vitamins: ['Vitamin C', 'Potassium', 'Vitamin K', 'Fiber'],
+    benefits: ['Digestion', 'Heart health', 'Weight loss'],
+    tip: 'Eat the skin! That\'s where half the fiber and most polyphenols are.',
+  },
+  {
+    id: 20,
+    name: 'Oats',
+    emoji: '🥣',
+    category: 'Carbs',
+    isVeg: true,
+    calories: 389,
+    per: '100g (dry)',
+    color: '#94a3b8',
+    nutrients: {
+      protein: { amount: '16.9g', dv: 34 },
+      fat: { amount: '6.9g', dv: 9 },
+      carbs: { amount: '66g', dv: 22 },
+      fiber: { amount: '10.6g', dv: 42 },
+    },
+    vitamins: ['Manganese', 'Phosphorus', 'Magnesium', 'Iron', 'Zinc'],
+    benefits: ['Lowers cholesterol', 'Steady energy', 'Heart health'],
+    tip: 'Contains beta-glucan, a unique type of soluble fiber.',
+  }
 ];
 
 // ─── Vitamin Data ─────────────────────────────────────────────────────────────
@@ -326,6 +526,12 @@ const vitaminData = [
 const foodCategories = ['All', 'Protein', 'Carbs', 'Fats', 'Vegetable', 'Fruit', 'Dairy', 'Nuts'];
 const vitaminTypes = ['All', 'Water-Soluble', 'Fat-Soluble'];
 
+// Helper to parse nutrient amount (e.g., "31g" -> 31)
+const parseAmount = (str) => {
+  if (!str) return 0;
+  return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
+};
+
 // ─── Nutrient Bar ─────────────────────────────────────────────────────────────
 const NutrientBar = ({ label, amount, dv, color }) => (
   <div className="nutrient-bar-row">
@@ -348,6 +554,7 @@ const NutrientBar = ({ label, amount, dv, color }) => (
 // ─── Food Card ────────────────────────────────────────────────────────────────
 const FoodCard = ({ food, onClick }) => (
   <GlassCard className="food-card" onClick={() => onClick(food)}>
+    <div className={`diet-indicator ${food.isVeg ? 'veg' : 'non-veg'}`}></div>
     <div className="food-card-emoji" style={{ filter: `drop-shadow(0 0 12px ${food.color}60)` }}>
       {food.emoji}
     </div>
@@ -386,95 +593,68 @@ const VitaminCard = ({ vitamin, onClick }) => (
 );
 
 // ─── Modal ────────────────────────────────────────────────────────────────────
-const DetailModal = ({ item, type, onClose }) => {
-  if (!item) return null;
+
+// ─── Diet Planner View ────────────────────────────────────────────────────────
+const DietPlanner = ({ plate, onRemove, onAddMore }) => {
+  const totals = plate.reduce((acc, item) => {
+    acc.calories += item.calories;
+    acc.protein += parseAmount(item.nutrients.protein.amount);
+    acc.fat += parseAmount(item.nutrients.fat.amount);
+    acc.carbs += parseAmount(item.nutrients.carbs.amount);
+    return acc;
+  }, { calories: 0, protein: 0, fat: 0, carbs: 0 });
+
   return (
-    <div className="detail-modal-overlay" onClick={onClose}>
-      <div className="detail-modal glass" onClick={e => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>✕</button>
-
-        {type === 'food' ? (
-          <>
-            <div className="modal-hero" style={{ background: `radial-gradient(circle at 30% 50%, ${item.color}20, transparent)` }}>
-              <span className="modal-emoji">{item.emoji}</span>
-              <div>
-                <h2 className="modal-title">{item.name}</h2>
-                <span className="modal-subtitle" style={{ color: item.color }}>{item.category} • {item.calories} kcal / {item.per}</span>
-              </div>
+    <div className="diet-planner fade-up">
+      <div className="planner-summary">
+        <GlassCard className="summary-card">
+          <div className="summary-header">
+            <h3>My Daily Plate</h3>
+            <span className="item-count">{plate.length} items</span>
+          </div>
+          <div className="summary-macros">
+            <div className="macro-item">
+              <span className="macro-val">{Math.round(totals.calories)}</span>
+              <span className="macro-lab">Calories</span>
             </div>
-            <div className="modal-body">
-              <h3 className="modal-section-title">Macronutrients</h3>
-              <NutrientBar label="Protein" amount={item.nutrients.protein.amount} dv={item.nutrients.protein.dv} color="#a855f7" />
-              <NutrientBar label="Fat" amount={item.nutrients.fat.amount} dv={item.nutrients.fat.dv} color="#f59e0b" />
-              <NutrientBar label="Carbs" amount={item.nutrients.carbs.amount} dv={item.nutrients.carbs.dv} color="#06b6d4" />
-              <NutrientBar label="Fiber" amount={item.nutrients.fiber.amount} dv={item.nutrients.fiber.dv} color="#10b981" />
-
-              <h3 className="modal-section-title">Key Vitamins & Minerals</h3>
-              <div className="tag-list">
-                {item.vitamins.map((v, i) => (
-                  <span key={i} className="nutrient-tag" style={{ borderColor: `${item.color}50`, color: item.color }}>{v}</span>
-                ))}
-              </div>
-
-              <h3 className="modal-section-title">Health Benefits</h3>
-              <div className="benefit-list">
-                {item.benefits.map((b, i) => (
-                  <div key={i} className="benefit-item">
-                    <span className="benefit-dot" style={{ background: item.color }} />
-                    {b}
-                  </div>
-                ))}
-              </div>
-
-              <div className="pro-tip-box" style={{ borderColor: `${item.color}40`, background: `${item.color}10` }}>
-                <span className="pro-tip-label">💡 Pro Tip</span>
-                <p>{item.tip}</p>
-              </div>
+            <div className="macro-item">
+              <span className="macro-val" style={{color: '#a855f7'}}>{Math.round(totals.protein)}g</span>
+              <span className="macro-lab">Protein</span>
             </div>
-          </>
+            <div className="macro-item">
+              <span className="macro-val" style={{color: '#06b6d4'}}>{Math.round(totals.carbs)}g</span>
+              <span className="macro-lab">Carbs</span>
+            </div>
+            <div className="macro-item">
+              <span className="macro-val" style={{color: '#f59e0b'}}>{Math.round(totals.fat)}g</span>
+              <span className="macro-lab">Fats</span>
+            </div>
+          </div>
+        </GlassCard>
+      </div>
+
+      <div className="plate-list">
+        {plate.length === 0 ? (
+          <div className="empty-plate">
+            <span>🍽️</span>
+            <p>Your plate is empty. Add foods to calculate your diet!</p>
+            <button className="add-btn-primary" onClick={onAddMore}>Browse Foods</button>
+          </div>
         ) : (
           <>
-            <div className="modal-hero" style={{ background: `radial-gradient(circle at 30% 50%, ${item.color}20, transparent)` }}>
-              <span className="modal-emoji">{item.emoji}</span>
-              <div>
-                <h2 className="modal-title">{item.name}</h2>
-                <span className={`vitamin-type-badge ${item.type === 'Fat-Soluble' ? 'fat' : 'water'} modal-badge`}>
-                  {item.type}
-                </span>
-              </div>
-            </div>
-            <div className="modal-body">
-              <div className="vit-info-row">
-                <div className="vit-info-box" style={{ borderColor: `${item.color}40` }}>
-                  <span className="vit-info-label">Daily Intake</span>
-                  <span className="vit-info-value" style={{ color: item.color }}>{item.dri}</span>
+            <div className="plate-items">
+              {plate.map((item, idx) => (
+                <div key={`${item.id}-${idx}`} className="plate-row glass">
+                  <span className="p-emoji">{item.emoji}</span>
+                  <div className="p-info">
+                    <span className="p-name">{item.name}</span>
+                    <span className="p-meta">{item.calories} kcal • {item.nutrients.protein.amount} P</span>
+                  </div>
+                  <button className="p-remove" onClick={() => onRemove(idx)}>✕</button>
                 </div>
-              </div>
-
-              <h3 className="modal-section-title">Function</h3>
-              <p className="modal-text">{item.function}</p>
-
-              <h3 className="modal-section-title">Deficiency Signs</h3>
-              <div className="warning-box">⚠️ {item.deficiency}</div>
-
-              <h3 className="modal-section-title">Overdose Risk</h3>
-              <p className="modal-text overdose">{item.overdose}</p>
-
-              <h3 className="modal-section-title">Best Food Sources</h3>
-              <div className="tag-list">
-                {item.sources.map((s, i) => (
-                  <span key={i} className="nutrient-tag" style={{ borderColor: `${item.color}50`, color: item.color }}>{s}</span>
-                ))}
-              </div>
-
-              <div className="sol-display">
-                <span>Body Absorption Rate</span>
-                <div className="sol-bar-h-track">
-                  <div className="sol-bar-h-fill" style={{ width: `${item.solubility}%`, background: item.color }} />
-                </div>
-                <span style={{ color: item.color }}>{item.solubility}%</span>
-              </div>
+              ))}
             </div>
+            <button className="add-more-btn" onClick={onAddMore}>+ Add More Items</button>
           </>
         )}
       </div>
@@ -486,14 +666,27 @@ const DetailModal = ({ item, type, onClose }) => {
 const Nutrition = () => {
   const [activeTab, setActiveTab] = useState('food');
   const [foodCategory, setFoodCategory] = useState('All');
+  const [dietFilter, setDietFilter] = useState('All'); // 'All', 'Veg', 'Non-Veg'
   const [vitaminType, setVitaminType] = useState('All');
   const [search, setSearch] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalType, setModalType] = useState(null);
+  const [plate, setPlate] = useState([]);
 
   const openModal = (item, type) => {
     setSelectedItem(item);
     setModalType(type);
+  };
+
+  const addToPlate = (item) => {
+    setPlate([...plate, item]);
+    closeModal();
+  };
+
+  const removeFromPlate = (index) => {
+    const newPlate = [...plate];
+    newPlate.splice(index, 1);
+    setPlate(newPlate);
   };
 
   const closeModal = () => {
@@ -503,8 +696,9 @@ const Nutrition = () => {
 
   const filteredFood = foodData.filter(f => {
     const matchCat = foodCategory === 'All' || f.category === foodCategory;
+    const matchDiet = dietFilter === 'All' || (dietFilter === 'Veg' ? f.isVeg : !f.isVeg);
     const matchSearch = f.name.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSearch;
+    return matchCat && matchDiet && matchSearch;
   });
 
   const filteredVitamins = vitaminData.filter(v => {
@@ -531,6 +725,12 @@ const Nutrition = () => {
         >
           💊 Vitamins
         </button>
+        <button
+          className={`nut-tab ${activeTab === 'planner' ? 'active' : ''}`}
+          onClick={() => { setActiveTab('planner'); setSearch(''); }}
+        >
+          📝 Planner
+        </button>
       </div>
 
       <div className="nutrition-content">
@@ -550,6 +750,17 @@ const Nutrition = () => {
         {/* ── FOOD TAB ── */}
         {activeTab === 'food' && (
           <>
+            <div className="diet-filters">
+              {['All', 'Veg', 'Non-Veg'].map(type => (
+                <button
+                  key={type}
+                  className={`diet-chip ${dietFilter === type ? 'active' : ''}`}
+                  onClick={() => setDietFilter(type)}
+                >
+                  {type === 'Veg' ? '🟢 Veg' : type === 'Non-Veg' ? '🔴 Non-Veg' : '🍽️ All'}
+                </button>
+              ))}
+            </div>
             <div className="filter-chips">
               {foodCategories.map(cat => (
                 <button
@@ -608,13 +819,115 @@ const Nutrition = () => {
             </div>
           </>
         )}
+
+        {/* ── PLANNER TAB ── */}
+        {activeTab === 'planner' && (
+          <DietPlanner 
+            plate={plate} 
+            onRemove={removeFromPlate} 
+            onAddMore={() => setActiveTab('food')} 
+          />
+        )}
       </div>
 
       <BottomNav />
 
       {/* Detail Modal */}
       {selectedItem && (
-        <DetailModal item={selectedItem} type={modalType} onClose={closeModal} />
+        <div className="detail-modal-overlay" onClick={closeModal}>
+          <div className="detail-modal glass" onClick={e => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>✕</button>
+
+            {modalType === 'food' ? (
+              <>
+                <div className="modal-hero" style={{ background: `radial-gradient(circle at 30% 50%, ${selectedItem.color}20, transparent)` }}>
+                  <span className="modal-emoji">{selectedItem.emoji}</span>
+                  <div>
+                    <h2 className="modal-title">{selectedItem.name}</h2>
+                    <span className="modal-subtitle" style={{ color: selectedItem.color }}>{selectedItem.category} • {selectedItem.calories} kcal / {selectedItem.per}</span>
+                  </div>
+                </div>
+                <div className="modal-body">
+                  <button className="add-to-plate-btn" onClick={() => addToPlate(selectedItem)}>
+                    ➕ Add to My Plate
+                  </button>
+
+                  <h3 className="modal-section-title">Macronutrients</h3>
+                  <NutrientBar label="Protein" amount={selectedItem.nutrients.protein.amount} dv={selectedItem.nutrients.protein.dv} color="#a855f7" />
+                  <NutrientBar label="Fat" amount={selectedItem.nutrients.fat.amount} dv={selectedItem.nutrients.fat.dv} color="#f59e0b" />
+                  <NutrientBar label="Carbs" amount={selectedItem.nutrients.carbs.amount} dv={selectedItem.nutrients.carbs.dv} color="#06b6d4" />
+                  <NutrientBar label="Fiber" amount={selectedItem.nutrients.fiber.amount} dv={selectedItem.nutrients.fiber.dv} color="#10b981" />
+
+                  <h3 className="modal-section-title">Key Vitamins & Minerals</h3>
+                  <div className="tag-list">
+                    {selectedItem.vitamins.map((v, i) => (
+                      <span key={i} className="nutrient-tag" style={{ borderColor: `${selectedItem.color}50`, color: selectedItem.color }}>{v}</span>
+                    ))}
+                  </div>
+
+                  <h3 className="modal-section-title">Health Benefits</h3>
+                  <div className="benefit-list">
+                    {selectedItem.benefits.map((b, i) => (
+                      <div key={i} className="benefit-item">
+                        <span className="benefit-dot" style={{ background: selectedItem.color }} />
+                        {b}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pro-tip-box" style={{ borderColor: `${selectedItem.color}40`, background: `${selectedItem.color}10` }}>
+                    <span className="pro-tip-label">💡 Pro Tip</span>
+                    <p>{selectedItem.tip}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="modal-hero" style={{ background: `radial-gradient(circle at 30% 50%, ${selectedItem.color}20, transparent)` }}>
+                  <span className="modal-emoji">{selectedItem.emoji}</span>
+                  <div>
+                    <h2 className="modal-title">{selectedItem.name}</h2>
+                    <span className={`vitamin-type-badge ${selectedItem.type === 'Fat-Soluble' ? 'fat' : 'water'} modal-badge`}>
+                      {selectedItem.type}
+                    </span>
+                  </div>
+                </div>
+                <div className="modal-body">
+                  <div className="vit-info-row">
+                    <div className="vit-info-box" style={{ borderColor: `${selectedItem.color}40` }}>
+                      <span className="vit-info-label">Daily Intake</span>
+                      <span className="vit-info-value" style={{ color: selectedItem.color }}>{selectedItem.dri}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="modal-section-title">Function</h3>
+                  <p className="modal-text">{selectedItem.function}</p>
+
+                  <h3 className="modal-section-title">Deficiency Signs</h3>
+                  <div className="warning-box">⚠️ {selectedItem.deficiency}</div>
+
+                  <h3 className="modal-section-title">Overdose Risk</h3>
+                  <p className="modal-text overdose">{selectedItem.overdose}</p>
+
+                  <h3 className="modal-section-title">Best Food Sources</h3>
+                  <div className="tag-list">
+                    {selectedItem.sources.map((s, i) => (
+                      <span key={i} className="nutrient-tag" style={{ borderColor: `${selectedItem.color}50`, color: selectedItem.color }}>{s}</span>
+                    ))}
+                  </div>
+
+                  <div className="sol-display">
+                    <span>Body Absorption Rate</span>
+                    <div className="sol-bar-h-track">
+                      <div className="sol-bar-h-fill" style={{ width: `${selectedItem.solubility}%`, background: selectedItem.color }} />
+                    </div>
+                    <span style={{ color: selectedItem.color }}>{selectedItem.solubility}%</span>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

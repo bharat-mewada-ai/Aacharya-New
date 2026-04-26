@@ -16,6 +16,7 @@ import Avatar from "./components/Avatar";
 import UserProfile from './pages/UserProfile';
 import ProfileGamified from './pages/ProfileGamified';
 import Nutrition from './pages/Nutrition';
+import Care from './pages/Care';
 import ShopModal from './components/features/ShopModal';
 
 import './App.css';
@@ -45,6 +46,7 @@ const AppContent = () => {
           <Route path="/avatar" element={<Avatar />} />
           <Route path="/profile" element={<ProfileGamified />} />
           <Route path="/nutrition" element={<Nutrition />} />
+          <Route path="/care" element={<Care />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         

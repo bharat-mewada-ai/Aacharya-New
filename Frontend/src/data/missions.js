@@ -109,7 +109,7 @@ export const generateMissionsForGoal = (goalId) => {
   } else if (goalId === 'muscle-gain') {
     specificMissions = [
       { id: 'daily-1', title: 'Heavy Lifting', description: 'Complete a progressive overload session', xp: 70, type: 'daily', category: 'fitness', icon: '🏋️', completed: false },
-      { id: 'daily-3', title: 'Protein Target', description: 'Hit your daily protein macro goal', xp: 50, type: 'daily', category: 'nutrition', icon: '🥩', completed: false }
+      { id: 'daily-3', title: 'Protein Target', description: 'Hit your daily protein macro goal', xp: 50, type: 'daily', category: 'nutrition', icon: '💪', completed: false }
     ];
   } else {
     // stay-fit

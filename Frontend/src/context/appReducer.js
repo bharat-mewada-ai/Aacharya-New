@@ -14,6 +14,7 @@ export const initialState = {
     avatar: defaultAvatar,
     healthCondition: false,
     healthConditionDetails: '',
+    gender: 'boy', // Default to boy
     onboardingComplete: false,
     setupComplete: false
   },
@@ -81,6 +82,12 @@ export const appReducer = (state, action) => {
       return {
         ...state,
         user: { ...state.user, weight: action.payload }
+      };
+
+    case 'SET_USER_GENDER':
+      return {
+        ...state,
+        user: { ...state.user, gender: action.payload }
       };
 
     case 'SET_HEALTH_CONDITION':
